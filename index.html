@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-strict-di>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+	<meta http-equiv="CACHE-CONTROL" content="NO-STORE">
+
+	<title>Mathias</title>
+    <!-- <base href="/"> -->
+    <base href="/mathias/">
+    
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="bower_components/toastr/toastr.min.css">
+	<link rel="stylesheet" href="bower_components/AdminLTE/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" type="text/css" href="src/app/layout/kopp.css">
+	<link rel="stylesheet" type="text/css" href="vendor/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-loading-bar/src/loading-bar.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div id="loading-bar-container"></div>	
+	<div class="wrapper">
+		<menu-topo></menu-topo>
+		<div class="content-wrapper">
+			<cabecalho></cabecalho>
+			<section class="content" ng-view></section>
+		</div>
+		<rodape></rodape>
+	</div>
+
+	<!-- vendor -->
+	<script src="bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="bower_components/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
+	<script src="bower_components/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="bower_components/AdminLTE/plugins/fastclick/fastclick.js"></script>
+	<script src="bower_components/AdminLTE/dist/js/app.min.js"></script>
+	<script type="text/javascript" src="bower_components/jquery-confirm/jquery.confirm.min.js"></script>
+	<script type="text/javascript" src="bower_components/toastr/toastr.min.js"></script>
+	<!-- fim vendor -->
+
+	<!-- angular -->
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+	<!-- fim angular -->
+
+	<!-- validação de cpf e cnpj -->
+	<script type="text/javascript" src="bower_components/cpf_cnpj/build/cpf_cnpj.min.js"></script>
+	<script type="text/javascript" src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+
+	<!-- aplicação de mascaras -->
+	<script type="text/javascript" src="bower_components/angular-ui-mask/dist/mask.min.js"></script>
+
+	<!-- datatables -->
+	<script type="text/javascript" src="vendor/angular-datatables/dist/angular-datatables.js"></script>
+	<script type="text/javascript" src="vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+	<!-- fim datatables -->
+
+	<script type="text/javascript" src="bower_components/jquery-ui/ui/widgets/datepicker.js"></script>
+
+	<!-- loading bar -->
+	<script type="text/javascript" src="bower_components/angular-loading-bar/src/loading-bar.js"></script>	
+
+	<script type="text/javascript" src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+	<!-- ///////////////////////////////////////////////////////////// -->
+	<!-- ///////////////////////////////////////////////////////////// -->
+	<!-- ///////////////////////////////////////////////////////////// -->
+
+
+	<!-- <script type="text/javascript" src="build/app-e273d59f6b.module.js"></script>
+	
+	<script type="text/javascript" src="build/layout/layout-8ebc68cc67.module.js"></script>
+	<script type="text/javascript" src="build/layout/rodape-724915ab57.directive.js"></script>
+	<script type="text/javascript" src="build/layout/menu-topo-d8a4dea044.directive.js"></script>
+	<script type="text/javascript" src="build/layout/cabecalho-7c2305e635.directive.js"></script>
+	<script type="text/javascript" src="build/layout/lista-5a364379f4.directive.js"></script>
+	<script type="text/javascript" src="build/layout/btn-remover-52eae2d1fe.directive.js"></script>
+	<script type="text/javascript" src="build/layout/btn-editar-a7404d9206.directive.js"></script>
+	
+	<script type="text/javascript" src="build/core/core-0acfc386ec.module.js"></script>
+	<script type="text/javascript" src="build/core/config-b352647502.route.js"></script>
+	<script type="text/javascript" src="build/core/constants-6141088567.js"></script>
+	<script type="text/javascript" src="build/core/utils/utils-74371f5ca9.module.js"></script>
+	<script type="text/javascript" src="build/core/utils/getdata-97191ab09c.factory.js"></script>
+	<script type="text/javascript" src="build/core/utils/tabela-6ab78a4f7d.factory.js"></script>
+	<script type="text/javascript" src="build/core/utils/message-73ba367387.constants.js"></script>
+	<script type="text/javascript" src="build/core/utils/message-341c4eff24.factory.js"></script>
+	<script type="text/javascript" src="build/core/utils/multi-promise-796eeb8398.factory.js"></script>
+	<script type="text/javascript" src="build/core/utils/promise-526dc72b14.factory.js"></script>
+	<script type="text/javascript" src="build/core/utils/controller-4c29e0d1c8.factory.js"></script>
+	
+	<script type="text/javascript" src="build/home/home-b79d3f2f6b.module.js"></script>
+	<script type="text/javascript" src="build/home/home-d6004f2313.js"></script>
+
+	<script type="text/javascript" src="build/pessoa/pessoa-304606eec7.module.js"></script>
+	<script type="text/javascript" src="build/pessoa/pessoa-0e6a770303.route.js"></script>
+	<script type="text/javascript" src="build/pessoa/pessoa-9c19f2cad1.rest.js"></script>
+	<script type="text/javascript" src="build/pessoa/pessoa-8a889dfccb.dto.js"></script>
+	<script type="text/javascript" src="build/pessoa/pessoa-lista-4ff83fdc1a.js"></script>
+	<script type="text/javascript" src="build/pessoa/pessoa-form-ecf72af9ab.js"></script>
+
+	<script type="text/javascript" src="build/tipo-demanda/tipo-demanda-f2744c27f4.module.js"></script>
+	<script type="text/javascript" src="build/tipo-demanda/tipo-demanda-7e974078c2.route.js"></script>
+	<script type="text/javascript" src="build/tipo-demanda/tipo-demanda-5cc1d094d5.rest.js"></script>
+	<script type="text/javascript" src="build/tipo-demanda/tipo-demanda-lista-a45808a6b9.js"></script>
+	<script type="text/javascript" src="build/tipo-demanda/tipo-demanda-form-7de2df259c.js"></script> -->
+
+
+
+	<script type="text/javascript" src="src/app/app.module.js"></script>
+
+	<script type="text/javascript" src="src/app/layout/layout.module.js"></script>
+	<script type="text/javascript" src="src/app/layout/rodape.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/menu-topo.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/cabecalho.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/lista.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/btn-remover.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/btn-editar.directive.js"></script>
+	<script type="text/javascript" src="src/app/layout/upload-arquivo.directive.js"></script>
+
+	<script type="text/javascript" src="src/app/core/core.module.js"></script>
+	<script type="text/javascript" src="src/app/core/config.route.js"></script>
+	<script type="text/javascript" src="src/app/core/constants.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/utils.module.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/getdata.factory.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/tabela.factory.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/message.constants.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/message.factory.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/multi-promise.factory.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/promise.factory.js"></script>
+	<script type="text/javascript" src="src/app/core/utils/controller.factory.js"></script>
+	
+	<script type="text/javascript" src="src/app/home/home.module.js"></script>
+	<script type="text/javascript" src="src/app/home/home.js"></script>
+
+	<script type="text/javascript" src="src/app/pessoa/pessoa.module.js"></script>
+	<script type="text/javascript" src="src/app/pessoa/pessoa.route.js"></script>
+	<script type="text/javascript" src="src/app/pessoa/pessoa.rest.js"></script>
+	<script type="text/javascript" src="src/app/pessoa/pessoa.dto.js"></script>
+	<script type="text/javascript" src="src/app/pessoa/pessoa-lista.js"></script>
+	<script type="text/javascript" src="src/app/pessoa/pessoa-form.js"></script>
+
+	<script type="text/javascript" src="src/app/tipo-demanda/tipo-demanda.module.js"></script>
+	<script type="text/javascript" src="src/app/tipo-demanda/tipo-demanda.route.js"></script>
+	<script type="text/javascript" src="src/app/tipo-demanda/tipo-demanda.rest.js"></script>
+	<script type="text/javascript" src="src/app/tipo-demanda/tipo-demanda-lista.js"></script>
+	<script type="text/javascript" src="src/app/tipo-demanda/tipo-demanda-form.js"></script>
+
+	<script type="text/javascript" src="src/app/demanda/demanda.module.js"></script>
+	<script type="text/javascript" src="src/app/demanda/demanda.route.js"></script>
+	<script type="text/javascript" src="src/app/demanda/demanda.rest.js"></script>
+	<script type="text/javascript" src="src/app/demanda/demanda-lista.js"></script>
+	<script type="text/javascript" src="src/app/demanda/demanda-form.js"></script>
+</body>
+</html>
