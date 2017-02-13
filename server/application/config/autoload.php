@@ -143,5 +143,6 @@ $autoload['model'] = array(
 	'DemandaModel',
 	'DemandaArquivoModel',
 	'DemandaFluxoModel',
-	'SituacaoModel'
+	'SituacaoModel',
+	'DemandaArquivoFluxoModel'
 );

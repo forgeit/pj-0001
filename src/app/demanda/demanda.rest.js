@@ -11,7 +11,8 @@
 		var service = {
 			buscar: buscar,
 			buscarTodos: buscarTodos,
-			salvar: salvar
+			salvar: salvar,
+			salvarFluxo: salvarFluxo
 		};
 
 		return service;
@@ -26,6 +27,10 @@
 
 		function salvar(data) {
 			return $http.post(configuracaoREST.url + configuracaoREST.demanda + 'salvar', data);
+		}
+
+		function salvarFluxo(data, id) {
+			return $http.post(configuracaoREST.url + 'demanda-fluxo/salvar/' + id, data);
 		}
 	}
 })();

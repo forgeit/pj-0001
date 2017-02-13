@@ -19,6 +19,7 @@ class DemandaFluxoModel extends MY_Model {
 				left join demanda_arquivo_fluxo daf on daf.id_demanda_fluxo = df.id_demanda_fluxo
 				WHERE
 				df.id_demanda = ?
+				GROUP BY 1, 2, 3, 4
 				ORDER BY ts_transacao";
 
         $query = $this->db->query($sql, array($id));

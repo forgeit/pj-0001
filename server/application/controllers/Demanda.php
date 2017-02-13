@@ -28,7 +28,7 @@ class Demanda extends CI_Controller {
 		$dados['arquivos'] = $arquivos;
 		$dados['fluxo'] = $fluxo;
 
-		$array = array('data' => array('DemandaDto' => $dados, 'id_demanda'));
+		$array = array('data' => array('DemandaDto' => $dados));
 
 		print_r(json_encode($array));
 	}
