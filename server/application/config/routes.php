@@ -83,6 +83,9 @@ $route['upload'] = 'upload/processar';
 
 $route['demanda/salvar'] = 'demanda/salvar';
 $route['demanda/remover'] = 'demanda/remover';
+$route['demanda/buscar/(:num)'] = 'demanda/buscar/$1';
 $route['demanda'] = 'demanda/buscarTodos';
+
+$route['situacao/combo'] = 'situacao/buscarCombo';
 
 //

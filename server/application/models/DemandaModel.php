@@ -27,4 +27,27 @@ class DemandaModel extends MY_Model {
             return null;
         }
 	}	
+
+	function buscarPorIdCompleto($id) {
+		$sql = "SELECT 
+				p.nome AS solicitante, 
+				DATE_FORMAT(d.dt_contato, '%d/%m/%Y') AS dtContato,
+				d.titulo AS titulo,
+				td.descricao AS tipoDemanda,
+				DATE_FORMAT(d.prazo_final, '%d/%m/%Y') AS prazoFinal,
+				d.descricao AS descricao,
+				d.id_situacao
+				FROM demanda d
+				JOIN pessoa p ON p.id_pessoa = d.id_solicitante
+				JOIN tipo_demanda td ON td.id_tipo_demanda = d.id_tipo_demanda
+				WHERE id_demanda = ?";
+
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return null;
+        }
+	}	
 }

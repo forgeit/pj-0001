@@ -8,6 +8,31 @@ class Demanda extends CI_Controller {
 		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
 	}
 
+	public function buscar() {
+
+		$dados = $this->DemandaModel->buscarPorIdCompleto($this->uri->segment(3));
+		$arquivos = $this->DemandaArquivoModel->buscarArquivosPorIdDemanda($this->uri->segment(3));
+
+		$fluxo = $this->DemandaFluxoModel->buscarFluxoPorIdDemanda($this->uri->segment(3));
+
+		foreach ($fluxo as $key => $value) {
+			$fluxo[$key]['descricao'] = $value['descricao'] == '' ? 'Não Informado' : $value['descricao'];
+			$fluxo[$key]['pessoa'] = $value['pessoa'] == '' ? 'Não Informado' : $value['pessoa'];
+			$fluxo[$key]['total'] = $value['total'] == 0 ? 'Não Possui' : $value['total'];
+		}
+
+		$dados['dtContato'] = $dados['dtContato'] == '00/00/0000' ? 'Não Informado' : $dados['dtContato'];
+		$dados['prazoFinal'] = $dados['prazoFinal'] == '00/00/0000' ? 'Não Informado' : $dados['prazoFinal'];
+		$dados['prazoFinal'] = $dados['prazoFinal'] == '' ? 'Não Informado' : $dados['prazoFinal'];
+		$dados['descricao'] = $dados['descricao'] == '' ? 'Não Informado' : $dados['descricao'];
+		$dados['arquivos'] = $arquivos;
+		$dados['fluxo'] = $fluxo;
+
+		$array = array('data' => array('DemandaDto' => $dados, 'id_demanda'));
+
+		print_r(json_encode($array));
+	}
+
 	public function salvar() {
 		$data = $this->security->xss_clean($this->input->raw_input_stream);
 		$demanda = json_decode($data);
@@ -81,8 +106,11 @@ class Demanda extends CI_Controller {
 							die();
 						}
 
-						$novo = $novoDiretorio . "/" . date('YmdHis-') . rand(1001, 9999) . "-" . $value;
-						if (!copy($temporario . $value, $novo)) {
+						$novo = array (
+							'arquivo' => $novoDiretorio . "/" . date('YmdHis-') . rand(1001, 9999) . "-" . $value,
+							'nome' => $value);
+
+						if (!copy($temporario . $value, $novo['arquivo'])) {
 							print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao efetuar o upload.")));
 							die();	
 						}	
@@ -108,7 +136,8 @@ class Demanda extends CI_Controller {
 			foreach ($novosArquivos as $key => $value) {
 				$demandaArquivoModel = array();
 				$demandaArquivoModel['id_demanda'] = $idDemanda;
-				$demandaArquivoModel['arquivo'] = $value;
+				$demandaArquivoModel['arquivo'] = $value['arquivo'];
+				$demandaArquivoModel['nome'] = $value['nome'];
 				$this->DemandaArquivoModel->inserir($demandaArquivoModel);
 			}
 		}

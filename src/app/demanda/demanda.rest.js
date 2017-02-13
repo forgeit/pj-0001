@@ -9,11 +9,16 @@
 
 	function dataservice($http, $location, $q, configuracaoREST, $httpParamSerializer) {
 		var service = {
+			buscar: buscar,
 			buscarTodos: buscarTodos,
 			salvar: salvar
 		};
 
 		return service;
+
+		function buscar(data) {
+			return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'buscar/' + data);
+		}
 
 		function buscarTodos(data) {
 			return $http.get(configuracaoREST.url + configuracaoREST.demanda);

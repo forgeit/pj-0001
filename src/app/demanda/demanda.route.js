@@ -45,6 +45,26 @@
 						}
 					]
 				}
+			})
+			.when('/visualizar-demanda/:id', {
+				templateUrl: 'src/app/demanda/demanda-visualizar.html',
+				controller: 'DemandaVisualizar',
+				controllerAs: 'vm',
+				titulo: 'Atualização de Demanda',
+				cabecalho: {
+					h1: 'Atualização de Demanda',
+					breadcrumbs: [
+						{
+							nome: 'Demandas',
+							link: 'demanda'
+						},
+						{
+							nome: 'Atualização',
+							link: 'visualizar-demanda',
+							ativo: true
+						}
+					]
+				}
 			});
 	}
 
