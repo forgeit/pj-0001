@@ -96,6 +96,14 @@ class Demanda extends CI_Controller {
 		$this->db->trans_begin();
 		$idDemanda = $this->DemandaModel->inserirRetornaId($demandaModel);
 
+		$demandaFluxoModel = array(
+			'id_demanda' => $idDemanda,
+			'id_situacao' => 1,
+			'ts_transacao' => date('Y-m-d H:i:s')
+		);
+
+		$this->DemandaFluxoModel->inserir($demandaFluxoModel);
+
 		if (count($novosArquivos) > 0) {
 			foreach ($novosArquivos as $key => $value) {
 				$demandaArquivoModel = array();
@@ -112,6 +120,10 @@ class Demanda extends CI_Controller {
 			$this->db->trans_commit();
 			print_r(json_encode($this->gerarRetorno(TRUE, "A demanda foi registrada com sucesso.")));
 		}
+	}
+
+	public function remover() {
+		print_r("teste");
 	}
 
 	private function gerarRetorno($response, $mensagem) {

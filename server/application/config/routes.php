@@ -82,6 +82,7 @@ $route['pessoa/salvar'] = 'pessoa/salvar';
 $route['upload'] = 'upload/processar';
 
 $route['demanda/salvar'] = 'demanda/salvar';
+$route['demanda/remover'] = 'demanda/remover';
 $route['demanda'] = 'demanda/buscarTodos';
 
 //

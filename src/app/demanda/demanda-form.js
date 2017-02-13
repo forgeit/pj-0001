@@ -159,31 +159,34 @@
 
 			var possuiArquivoPendente = false;
 
-			angular.forEach(vm.uploader.queue, function (value, index) {
-				if (!(value.isSuccess || value.isError)) {
-					possuiArquivoPendente = true;
-				}
-
-				if (index === (vm.uploader.queue.length - 1)) {
-					if (possuiArquivoPendente) {
-						$.confirm({
-						    text: "O formulário possui arquivos que ainda não foram enviados, deseja ignora-los?",
-						    title: "Confirmação",
-						    confirm: function(button) {
-						        dataservice.salvar(vm.demanda).then(success).catch(error);
-						    },
-					        confirmButtonClass: "btn-danger btn-flat",
-					        cancelButtonClass: "btn-default btn-flat",
-						    confirmButton: "Sim, registrar sem os arquivos!",
-						    cancelButton: "Não, aguardar o envio",
-						    dialogClass: "modal-dialog modal-lg"
-						});
-					} else {
-						dataservice.salvar(vm.demanda).then(success).catch(error);
+			if (vm.uploader.queue.length == 0) {
+				dataservice.salvar(vm.demanda).then(success).catch(error);
+			} else {
+				angular.forEach(vm.uploader.queue, function (value, index) {
+					if (!(value.isSuccess || value.isError)) {
+						possuiArquivoPendente = true;
 					}
-				}
-			});
-			
+
+					if (index === (vm.uploader.queue.length - 1)) {
+						if (possuiArquivoPendente) {
+							$.confirm({
+							    text: "O formulário possui arquivos que ainda não foram enviados, deseja ignora-los?",
+							    title: "Confirmação",
+							    confirm: function(button) {
+							        dataservice.salvar(vm.demanda).then(success).catch(error);
+							    },
+						        confirmButtonClass: "btn-danger btn-flat",
+						        cancelButtonClass: "btn-default btn-flat",
+							    confirmButton: "Sim, registrar sem os arquivos!",
+							    cancelButton: "Não, aguardar o envio",
+							    dialogClass: "modal-dialog modal-lg"
+							});
+						} else {
+							dataservice.salvar(vm.demanda).then(success).catch(error);
+						}
+					}
+				});
+			}			
 
 			function error(response) {
 				console.log(response);
