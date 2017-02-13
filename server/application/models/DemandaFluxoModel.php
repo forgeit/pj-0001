@@ -21,8 +21,24 @@ class DemandaFluxoModel extends MY_Model {
         }
 	}	
 
+	function buscarArquivosPorDemanda($id) {
+		$sql = "SELECT
+				*
+				FROM demanda_arquivo_fluxo d
+				WHERE id_demanda_fluxo = ?";
+
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}	
+
 	function buscarFluxoPorIdDemanda($id) {
 		$sql = "select 
+				df.id_demanda_fluxo,
 				df.descricao AS descricao,
 				p.nome AS pessoa,
 				s.descricao AS situacao,

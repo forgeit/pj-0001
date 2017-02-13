@@ -84,6 +84,7 @@ $route['login/entrar'] = 'login/entrar';
 
 $route['demanda/salvar'] = 'demanda/salvar';
 $route['demanda-fluxo/salvar/(:num)'] = 'demandaFluxo/salvar/$1';
+$route['demanda-fluxo/buscar-arquivos/(:num)'] = 'demandaFluxo/buscarArquivos/$1';
 $route['demanda/remover'] = 'demanda/remover';
 $route['demanda/buscar/(:num)'] = 'demanda/buscar/$1';
 $route['demanda'] = 'demanda/buscarTodos';

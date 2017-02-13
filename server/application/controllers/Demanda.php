@@ -86,7 +86,7 @@ class Demanda extends MY_Controller {
 			if (count($demanda->arquivos) > 0) {
 				$arquivosTemporarios = $demanda->arquivos;
 				$temporario = "../arquivos/tmp/";
-				$diretorio = "../arquivos/demanda/";
+				$diretorioo = "../arquivos/demanda/";
 
 				foreach ($arquivosTemporarios as $key => $value) {
 					if (!file_exists($temporario . $value)) {

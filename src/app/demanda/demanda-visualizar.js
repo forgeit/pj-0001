@@ -29,6 +29,7 @@
 		vm.uploader.onSuccessItem = sucessoAoEnviarArquivo;
 		vm.salvar = salvar;
 		vm.setarDescricao = setarDescricao;
+		vm.setarArquivos = setarArquivos;
 
 		vm.teste = function () {
 			console.log(vm.demandaFluxo);
@@ -71,6 +72,20 @@
 
 			function success(response) {
 				var array = controllerUtils.getData(response, 'ArrayList');
+				return controllerUtils.promise.criar(true, array);
+			}
+		}
+
+		function carregarArquivosDemanda(id) {
+			return demandaRest.buscarArquivosPorDemandaFluxo(id).then(success).catch(error);
+
+			function error(response) {
+				return controllerUtils.promise.criar(false, []);
+			}
+
+			function success(response) {
+				var array = controllerUtils.getData(response, 'ArrayList');
+				vm.arquivos = array;
 				return controllerUtils.promise.criar(true, array);
 			}
 		}
@@ -184,11 +199,17 @@
 
 				if (response.data.status == 'true') {
 					vm.demandaFluxo = {};
+					vm.uploader.clearQueue();
 					controllerUtils.ready([carregar()]).then(function (values) {
 						inicializar(values);
 					});	
 				}
 			}
+		}
+
+		function setarArquivos(id) {
+			carregarArquivosDemanda(id);
+			$('.modalArquivos').modal('show');
 		}
 
 		function setarDescricao(descricao) {

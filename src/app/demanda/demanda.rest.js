@@ -11,11 +11,16 @@
 		var service = {
 			buscar: buscar,
 			buscarTodos: buscarTodos,
+			buscarArquivosPorDemandaFluxo: buscarArquivosPorDemandaFluxo,
 			salvar: salvar,
 			salvarFluxo: salvarFluxo
 		};
 
 		return service;
+
+		function buscarArquivosPorDemandaFluxo(data) {
+			return $http.get(configuracaoREST.url + 'demanda-fluxo/buscar-arquivos/' + data);
+		}
 
 		function buscar(data) {
 			return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'buscar/' + data);

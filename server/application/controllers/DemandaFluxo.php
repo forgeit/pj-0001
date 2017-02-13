@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class DemandaFluxo extends MY_Controller {
 
+	public function buscarArquivos() {	
+		$lista = $this->DemandaFluxoModel->buscarArquivosPorDemanda($this->uri->segment(3));
+		print_r(json_encode(array('data' => array ('ArrayList' => $lista ? $lista : array()))));
+	}
+
 	public function salvar() {
 		$data = $this->security->xss_clean($this->input->raw_input_stream);
 		$demandaFluxo = json_decode($data);
