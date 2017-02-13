@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pessoa extends CI_Controller {
+class Pessoa extends MY_Controller {
 
 	public function atualizar() {
 		$data = $this->security->xss_clean($this->input->raw_input_stream);

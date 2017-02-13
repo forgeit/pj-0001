@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class TipoDemanda extends CI_Controller {
+class TipoDemanda extends MY_Controller {
 	public function buscar() {
 		$array = array('data' => 
 			array('TipoDemandaDto' => $this->TipoDemandaModel->buscarPorId($this->uri->segment(2), 'id_tipo_demanda')));

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class TipoPessoa extends CI_Controller {
+class TipoPessoa extends MY_Controller {
 
 	public function atualizar() {
 	}

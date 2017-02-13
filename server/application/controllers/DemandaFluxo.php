@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class DemandaFluxo extends CI_Controller {
+class DemandaFluxo extends MY_Controller {
 
 	public function salvar() {
 		$data = $this->security->xss_clean($this->input->raw_input_stream);

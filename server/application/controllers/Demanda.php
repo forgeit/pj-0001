@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Demanda extends CI_Controller {
+class Demanda extends MY_Controller {
 
 	public function buscarTodos() {
 		$lista = $this->DemandaModel->buscarTodosNativo();
