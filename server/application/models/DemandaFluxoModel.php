@@ -6,6 +6,21 @@ class DemandaFluxoModel extends MY_Model {
 		$this->table = 'demanda_fluxo';
 	}
 
+	function buscarPorPessoa($id) {
+		$sql = "SELECT
+				id_demanda
+				FROM demanda_fluxo d
+				WHERE id_pessoa = ?";
+
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}	
+
 	function buscarFluxoPorIdDemanda($id) {
 		$sql = "select 
 				df.descricao AS descricao,

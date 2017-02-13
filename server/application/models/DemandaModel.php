@@ -28,6 +28,36 @@ class DemandaModel extends MY_Model {
         }
 	}	
 
+	function buscarPorPessoa($id) {
+		$sql = "SELECT
+				id_demanda
+				FROM demanda d
+				WHERE id_solicitante = ?";
+
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}	
+
+	function buscarPorTipoDemanda($id) {
+		$sql = "SELECT
+				id_demanda
+				FROM demanda d
+				WHERE id_tipo_demanda = ?";
+
+        $query = $this->db->query($sql, array($id));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}	
+
 	function buscarPorIdCompleto($id) {
 		$sql = "SELECT 
 				p.nome AS solicitante, 

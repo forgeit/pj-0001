@@ -14,6 +14,14 @@ class TipoDemanda extends MY_Controller {
 	}
 
 	public function excluir() {
+
+		$dados = $this->DemandaModel->buscarPorTipoDemanda($this->uri->segment(3));
+
+		if (count($dados) > 0) {
+			print_r(json_encode($this->gerarRetorno(FALSE, "O tipo de demanda não pode ser removido, o mesmo está sendo utilizado em alguma demanda.")));
+			die();
+		}
+		
 		$response = $this->TipoDemandaModel->excluir($this->uri->segment(3), 'id_tipo_demanda');
 
 		$message = array();
@@ -75,7 +83,7 @@ class TipoDemanda extends MY_Controller {
 			$array = $this->gerarRetorno($response, $response ? "Sucesso ao salvar o registro." : "Erro ao salvar o registro.");
 		} else {
 			if ($this->TipoDemandaModel->buscarPorDescricao($tipoDemandaModel['descricao'], $atualizar)[0]['total'] > 0) {
-				print_r($this->gerarRetorno(FALSE, "O valor informado já está registrado no banco de dados."));
+				print_r(json_encode($this->gerarRetorno(FALSE, "O valor informado já está registrado no banco de dados.")));
 				die();
 			}
 

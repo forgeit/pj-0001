@@ -80,6 +80,7 @@ $route['tipo-demanda/salvar/(:num)'] = 'tipoDemanda/salvar/$1';
 $route['pessoa/salvar'] = 'pessoa/salvar';
 
 $route['upload'] = 'upload/processar';
+$route['login/entrar'] = 'login/entrar';
 
 $route['demanda/salvar'] = 'demanda/salvar';
 $route['demanda-fluxo/salvar/(:num)'] = 'demandaFluxo/salvar/$1';

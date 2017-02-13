@@ -161,6 +161,21 @@ class Pessoa extends MY_Controller {
 	}
 
 	public function excluir() {
+
+		$dados = $this->DemandaModel->buscarPorPessoa($this->uri->segment(3));
+
+		if (count($dados) > 0) {
+			print_r(json_encode($this->gerarRetorno(FALSE, "Não é possível remover a pessoa, a mesma possui demandas no sistema.")));
+			die();		
+		}
+
+		$dados = $this->DemandaFluxoModel->buscarPorPessoa($this->uri->segment(3));
+
+		if (count($dados) > 0) {
+			print_r(json_encode($this->gerarRetorno(FALSE, "Não é possível remover a pessoa, a mesma faz parte do fluxo de demandas no sistema.")));
+			die();		
+		}
+
 		$response = $this->PessoaModel->excluir($this->uri->segment(3), 'id_pessoa');
 
 		$message = array();
