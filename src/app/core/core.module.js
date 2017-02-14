@@ -11,6 +11,7 @@
 		'core.utils', 
 		'angular-loading-bar',
 		'ngStorage',
+		'angular-jwt',
 		'core.auth']);
 
 })();

@@ -17,24 +17,20 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="src/app/layout/img/perfil.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Mathias Bertram</span>
+                        <img ng-src="{{ usuarioLogado.imagem }}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{ usuarioLogado.nome }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="src/app/layout/img/perfil.jpg" class="img-circle" alt="User Image">
-
-                            <p>
-                                Mathias Bertram - Empresário/Vereador
-                                <small>Membro desde Jan. 2017</small>
-                            </p>
+                            <img ng-src="{{ usuarioLogado.imagem }}" class="img-circle" alt="Imagem do Usuário">
+                            <p>{{ usuarioLogado.nome + ' - ' + usuarioLogado.cargo }}</p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Configurações</a>
+                                <a href="#" class="btn btn-default btn-flat">Alterar Senha</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sair do Sistema</a>
+                                <a href="#" class="btn btn-default btn-flat" ng-click="vm.sair()">Sair do Sistema</a>
                             </div>
                         </li>
                     </ul>
