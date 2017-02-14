@@ -11,8 +11,6 @@ class MY_Controller extends CI_Controller {
 			$seguro = false;
 		}
 
-		$seguro = false;
-
 		if ($seguro) {
 			if ($this->input->get_request_header('Authorization')) {
 				$code = str_replace("Bearer ", "", $this->input->get_request_header('Authorization'));

@@ -16,7 +16,10 @@ class Login extends MY_Controller {
 
 		$usuario = $this->UsuarioModel->verificarLogin($usuario->login, md5($usuario->senha));
 		if ($usuario) {
-			echo $this->generate_token($usuario[0]);
+			$array = $this->gerarRetorno(TRUE, "Sucesso ao autenticar, redirecionando.");
+			$array['data'] = array('token' => $this->generate_token($usuario[0]));
+
+			print_r(json_encode($array));
 		} else {
 			print_r(json_encode($this->gerarRetorno(FALSE, "Dados informados são inválidos.")));
 			die();
@@ -26,8 +29,8 @@ class Login extends MY_Controller {
 	public function generate_token($usuario){
     	$this->load->library("JWT");
 	    $CONSUMER_SECRET = 'sistema_mathias_2016';
-	    $CONSUMER_TTL = 30;
-	    echo $this->jwt->encode(array(
+	    $CONSUMER_TTL = 1800;
+	    return $this->jwt->encode(array(
 	   	  'nome' => $usuario['nome'],
 	   	  'cargo' => $usuario['cargo'],
 	   	  'imagem' => $usuario['imagem'],
