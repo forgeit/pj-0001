@@ -11,7 +11,7 @@ gulp.task('concatenar', concatenar);
 gulp.task('limpar', limpar);
 
 function criarRevisao() {
-	gulp.src(paths.js)
+	gulp.src('build/all.min.js')
 		.pipe(rev())
 		.pipe(gulp.dest(paths.build));
 }

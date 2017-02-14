@@ -17,6 +17,8 @@
 		vm.tabela = {};
 		vm.instancia = {};
 
+		console.log('Teste');
+
 		iniciar();
 
 		function iniciar() {
