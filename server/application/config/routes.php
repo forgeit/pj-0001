@@ -52,43 +52,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
 $route['endereco/cidade'] = 'endereco/cidade';
 $route['endereco/bairro/(:num)'] = 'endereco/bairro/$1';
 $route['endereco/logradouro/(:num)'] = 'endereco/logradouro/$1';
-
 $route['tipo-pessoa'] = 'tipoPessoa/buscarTodos';
-
 $route['pessoa'] = 'pessoa/buscarTodos';
 $route['pessoa/combo'] = 'pessoa/buscarCombo';
 $route['pessoa/filtro'] = 'pessoa/buscarComboFiltro';
 $route['pessoa/(:num)'] = 'pessoa/buscar';
 $route['pessoa/excluir/(:num)'] = 'pessoa/excluir/$1';
 $route['pessoa/atualizar/(:num)'] = 'pessoa/atualizar/$1';
-
 $route['tipo-demanda'] = 'tipoDemanda/buscarTodos';
 $route['tipo-demanda/(:num)'] = 'tipoDemanda/buscar/$1';
 $route['tipo-demanda/excluir/(:num)'] = 'tipoDemanda/excluir/$1';
 $route['tipo-demanda/salvar'] = 'tipoDemanda/salvar';
 $route['tipo-demanda/salvar/(:num)'] = 'tipoDemanda/salvar/$1';
-
-
-// $route['cliente'] = 'cliente/buscarTodos';
-// $route['cliente/(:num)'] = 'cliente/buscar/$1';
-// $route['cliente/atualizar'] = 'cliente/atualizar';
-// $route['cliente/excluir/(:num)'] = 'cliente/excluir/$1';
 $route['pessoa/salvar'] = 'pessoa/salvar';
-
 $route['upload'] = 'upload/processar';
 $route['login/entrar'] = 'login/entrar';
-
 $route['demanda/salvar'] = 'demanda/salvar';
 $route['demanda-fluxo/salvar/(:num)'] = 'demandaFluxo/salvar/$1';
 $route['demanda-fluxo/buscar-arquivos/(:num)'] = 'demandaFluxo/buscarArquivos/$1';
-$route['demanda/remover'] = 'demanda/remover';
+$route['demanda/remover/(:num)'] = 'demanda/remover/$1';
 $route['demanda/buscar/(:num)'] = 'demanda/buscar/$1';
 $route['demanda'] = 'demanda/buscarTodos';
-
 $route['situacao/combo'] = 'situacao/buscarCombo';
-
-//

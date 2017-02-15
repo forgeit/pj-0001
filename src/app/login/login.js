@@ -32,7 +32,6 @@
 					$rootScope.usuarioLogado.cargo = payload.cargo;
 					$rootScope.usuarioLogado.imagem = payload.imagem;
 
-
 					controllerUtils.$location.path('/');
 				}
 			}

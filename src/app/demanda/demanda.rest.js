@@ -13,6 +13,7 @@
 			buscarTodos: buscarTodos,
 			buscarArquivosPorDemandaFluxo: buscarArquivosPorDemandaFluxo,
 			salvar: salvar,
+			remover: remover,
 			salvarFluxo: salvarFluxo
 		};
 
@@ -32,6 +33,10 @@
 
 		function salvar(data) {
 			return $http.post(configuracaoREST.url + configuracaoREST.demanda + 'salvar', data);
+		}
+
+		function remover(data) {
+			return $http.post(configuracaoREST.url + configuracaoREST.demanda + 'remover/' + data);
 		}
 
 		function salvarFluxo(data, id) {

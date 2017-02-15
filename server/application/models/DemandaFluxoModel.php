@@ -6,6 +6,11 @@ class DemandaFluxoModel extends MY_Model {
 		$this->table = 'demanda_fluxo';
 	}
 
+	function removerPorIdDemanda($id) {
+		$sql = "delete from demanda_fluxo where id_demanda = ?";
+        return $query = $this->db->query($sql, array($id));
+    }
+
 	function buscarPorPessoa($id) {
 		$sql = "SELECT
 				id_demanda

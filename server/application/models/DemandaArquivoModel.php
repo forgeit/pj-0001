@@ -6,6 +6,11 @@ class DemandaArquivoModel extends MY_Model {
 		$this->table = 'demanda_arquivo';
 	}
 
+	function removerPorIdDemanda($id) {
+		$sql = "delete from demanda_arquivo where id_demanda = ?";
+        return $query = $this->db->query($sql, array($id));
+    }
+
 	function buscarArquivosPorIdDemanda($id) {
 		$sql = "SELECT 
 				id_demanda_arquivo,

@@ -86,7 +86,7 @@ class Demanda extends MY_Controller {
 			if (count($demanda->arquivos) > 0) {
 				$arquivosTemporarios = $demanda->arquivos;
 				$temporario = "../arquivos/tmp/";
-				$diretorioo = "../arquivos/demanda/";
+				$diretorio = "../arquivos/demanda/";
 
 				foreach ($arquivosTemporarios as $key => $value) {
 					if (!file_exists($temporario . $value)) {
@@ -152,7 +152,47 @@ class Demanda extends MY_Controller {
 	}
 
 	public function remover() {
-		print_r("teste");
+		$id = $this->uri->segment(3);
+
+		$this->db->trans_begin();
+
+		try {
+			if (!$this->DemandaArquivoFluxoModel->removerPorIdDemanda($id)) {
+				$this->db->trans_rollback();
+				print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+				die();
+			}
+
+			if (!$this->DemandaFluxoModel->removerPorIdDemanda($id)) {
+				$this->db->trans_rollback();
+				print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+				die();
+			}
+
+			if (!$this->DemandaArquivoModel->removerPorIdDemanda($id)) {
+				$this->db->trans_rollback();
+				print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+				die();
+			}
+
+			if (!$this->DemandaModel->removerPorIdDemanda($id)) {
+				$this->db->trans_rollback();
+				print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+				die();
+			}
+
+			if ($this->db->trans_status() === FALSE){
+				$this->db->trans_rollback();
+				print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+			} else {
+				$this->db->trans_commit();
+				print_r(json_encode($this->gerarRetorno(TRUE, "Sucesso ao remover.")));
+			}
+		} catch(Exception $ex) {
+			$this->db->trans_rollback();
+			print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao remover.")));
+		}
+
 	}
 
 	private function gerarRetorno($response, $mensagem) {

@@ -6,6 +6,11 @@ class DemandaModel extends MY_Model {
 		$this->table = 'demanda';
 	}
 
+	function removerPorIdDemanda($id) {
+		$sql = "delete from demanda where id_demanda = ?";
+        return $query = $this->db->query($sql, array($id));
+    }
+
 	function buscarTodosNativo() {
 		$sql = "SELECT
 				d.id_demanda,

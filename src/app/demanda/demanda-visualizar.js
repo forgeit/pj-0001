@@ -30,6 +30,7 @@
 		vm.salvar = salvar;
 		vm.setarDescricao = setarDescricao;
 		vm.setarArquivos = setarArquivos;
+		vm.voltar = voltar;
 
 		vm.teste = function () {
 			console.log(vm.demandaFluxo);

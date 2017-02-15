@@ -20,7 +20,6 @@
 		/* jshint validthis: true */
 		var vm = this;
 
-		vm.atualizar = atualizar;
 		vm.demanda = {};
 		vm.editar = false;
 		vm.filtrarPessoa = filtrarPessoa;
@@ -39,22 +38,6 @@
 
 		function teste() {
 			console.log(vm.demanda);
-		}
-
-		function atualizar(formulario) {
-			// dataservice.atualizar(vm.pessoa.id_pessoa, dto.criarAtualizar(vm.pessoa)).then(success).catch(error);
-
-			// function error(response) {
-			// 	controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao atualizar a pessoa.');
-			// }
-
-			// function success(response) {
-			// 	controllerUtils.feedMessage(response);
-
-			// 	if (response.data.status == 'true') {
-			// 		voltar();
-			// 	}
-			// }
 		}
 
 		function carregarSolicitantes() {
@@ -222,7 +205,7 @@
         };
 
 		function voltar() {
-			controllerUtils.$location.path('demanda');
+			controllerUtils.$location.path('/demanda');
 		}
 	}
 
