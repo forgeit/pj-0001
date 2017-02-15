@@ -68,7 +68,8 @@ class Demanda extends MY_Controller {
 		}		
 
 		if ($demanda->dtContato) {
-			$demandaModel['dt_contato'] = $demanda->dtContato;
+			$data = explode("/", $demanda->dtContato);
+			$demandaModel['dt_contato'] = $data[2] . '-' . $data[1] . '-' . $data[0];
 		} else {
 			print_r(json_encode($this->gerarRetorno(FALSE, "O campo data de contato é obrigatório.")));
 			die();
@@ -76,7 +77,10 @@ class Demanda extends MY_Controller {
 
 		if (isset($demanda->prazoFinal)) {
 			if ($demanda->prazoFinal) {
-				$demandaModel['prazo_final'] = $demanda->prazoFinal;
+
+				$data = explode("/", $demanda->prazoFinal);
+				$demandaModel['prazo_final'] = $data[2] . '-' . $data[1] . '-' . $data[0];
+
 			}
 		}
 		
