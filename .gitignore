@@ -5,3 +5,4 @@ database/
 debug/
 vendor/
 build/
+server/system/cache/
