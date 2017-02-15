@@ -31,6 +31,7 @@ class Login extends MY_Controller {
 	    $CONSUMER_SECRET = 'sistema_mathias_2016';
 	    $CONSUMER_TTL = 1800;
 	    return $this->jwt->encode(array(
+	   	  'id' => $usuario['id_usuario'],
 	   	  'nome' => $usuario['nome'],
 	   	  'cargo' => $usuario['cargo'],
 	   	  'imagem' => $usuario['imagem'],

@@ -9,6 +9,7 @@
 		'app.pessoa',
 		'app.demanda',
 		'app.login',
+		'app.usuario',
 		'app.tipo-demanda',
 		'app.situacao',
 		'angularFileUpload']);

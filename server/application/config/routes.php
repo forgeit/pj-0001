@@ -77,3 +77,4 @@ $route['demanda/remover/(:num)'] = 'demanda/remover/$1';
 $route['demanda/buscar/(:num)'] = 'demanda/buscar/$1';
 $route['demanda'] = 'demanda/buscarTodos';
 $route['situacao/combo'] = 'situacao/buscarCombo';
+$route['usuario/alterar-senha/(:num)'] = 'usuario/alterarSenha/$1';

@@ -9,7 +9,7 @@ class UsuarioModel extends MY_Model {
 	function verificarLogin($login, $senha) {
 
 		$sql = "SELECT 
-				nome, cargo, imagem
+				id_usuario, nome, cargo, imagem
 				FROM usuario
 				WHERE login = ? AND senha = ?";
 
