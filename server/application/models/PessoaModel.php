@@ -8,7 +8,11 @@ class PessoaModel extends MY_Model {
 
 	function buscarTodosNativo() {
 		$sql = "SELECT 
-				p.id_pessoa, p.nome, p.email, CASE WHEN p.celular IS NULL THEN '-' ELSE p.celular END AS celular, t.descricao as tipo
+				p.id_pessoa, 
+                p.nome, 
+                CASE WHEN p.email IS NULL THEN '-' ELSE p.email END AS email, 
+                CASE WHEN p.celular IS NULL THEN '-' ELSE p.celular END AS celular, 
+                t.descricao as tipo
 				FROM pessoa p
 				JOIN tipo_pessoa t ON t.id_tipo_pessoa = p.id_tipo_pessoa";
 

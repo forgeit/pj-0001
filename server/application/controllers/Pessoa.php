@@ -22,11 +22,10 @@ class Pessoa extends MY_Controller {
 			die();
 		}
 
+		$pessoaModel['email'] = null;
+
 		if (isset($pessoa->email)) {		
-			if (!trim($pessoa->email)) {
-				print_r(json_encode($this->gerarRetorno(FALSE, "O campo e-mail é obrigatório.")));
-				die();
-			} else {
+			if ($pessoa->email) {
 				$pessoaModel['email'] = $pessoa->email;
 
 				if ($this->PessoaModel->buscarPorEmailId($pessoaModel['email'], $pessoaModel['id_pessoa'])) {
@@ -34,9 +33,6 @@ class Pessoa extends MY_Controller {
 					die();
 				}
 			}
-		} else {
-			print_r(json_encode($this->gerarRetorno(FALSE, "O campo e-mail é obrigatório.")));
-			die();	
 		}
 
 		if (isset($pessoa->tipoPessoa)) {
@@ -84,6 +80,14 @@ class Pessoa extends MY_Controller {
 		if (isset($pessoa->telefone)) {
 			if ($pessoa->telefone) {
 				$pessoaModel['telefone'] = $pessoa->telefone;
+			}
+		}
+
+		$pessoaModel['numero'] = null;
+
+		if (isset($pessoa->numero)) {
+			if ($pessoa->numero) {
+				$pessoaModel['numero'] = $pessoa->numero;
 			}
 		}
 
@@ -222,21 +226,17 @@ class Pessoa extends MY_Controller {
 			die();
 		}
 
+		$pessoaModel['email'] = null;
+
 		if (isset($pessoa->email)) {		
-			if (!trim($pessoa->email)) {
-				print_r(json_encode($this->gerarRetorno(FALSE, "O campo e-mail é obrigatório.")));
-				die();
-			} else {
+			if ($pessoa->email) {
 				$pessoaModel['email'] = $pessoa->email;
 
-				if ($this->PessoaModel->buscarPorEmail($pessoaModel['email'])) {
+				if ($this->PessoaModel->buscarPorEmailId($pessoaModel['email'], $pessoaModel['id_pessoa'])) {
 					print_r(json_encode($this->gerarRetorno(FALSE, "O e-mail informado já está registrado.")));
 					die();
 				}
 			}
-		} else {
-			print_r(json_encode($this->gerarRetorno(FALSE, "O campo e-mail é obrigatório.")));
-			die();	
 		}
 
 		if (isset($pessoa->tipoPessoa)) {
@@ -280,6 +280,13 @@ class Pessoa extends MY_Controller {
 		if (isset($pessoa->telefone)) {
 			if ($pessoa->telefone) {
 				$pessoaModel['telefone'] = $pessoa->telefone;
+			}
+		}
+
+		
+		if (isset($pessoa->numero)) {
+			if ($pessoa->numero) {
+				$pessoaModel['numero'] = $pessoa->numero;
 			}
 		}
 

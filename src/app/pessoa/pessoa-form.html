@@ -13,9 +13,8 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group" ng-class="formulario.email.$dirty && formulario.email.$invalid ? 'has-error' : ''">
-								<label for="email">E-mail: *</label>
-								<input id="email" type="email" name="email" class="form-control" placeholder="Informe o e-mail" ng-model="vm.pessoa.email" required>
-								<span class="help-block" ng-show="formulario.email.$dirty && formulario.email.$error.required">O campo é obrigatório</span>
+								<label for="email">E-mail:</label>
+								<input id="email" type="email" name="email" class="form-control" placeholder="Informe o e-mail" ng-model="vm.pessoa.email">
 								<span class="help-block" ng-show="formulario.email.$dirty && formulario.email.$error.email">O e-mail informado é inválido</span>
 							</div>
 						</div>
@@ -78,6 +77,12 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
+								<label for="numero">Número do Endereço:</label>
+								<input id="numero" type="text" name="numero" class="form-control" ng-model="vm.pessoa.numero" placeholder="Informe o número da residência">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
 								<label for="cidade">Cidade:</label>
 								<select class="form-control" id="cidade" name="cidade" ng-options="cidade.id_cidade as cidade.nome for cidade in vm.cidadeList track by cidade.id_cidade" ng-model="vm.pessoa.cidade" ng-change="vm.carregarBairroList(vm.pessoa.cidade)">
 							    	<option value="">Selecione</option> 	
@@ -92,12 +97,30 @@
 								</select>
 							</div>
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="logradouro">Logradouro:</label>
 								<select class="form-control" id="logradouro" name="logradouro" ng-options="logradouro.id_logradouro as logradouro.nome for logradouro in vm.logradouroList track by logradouro.id_logradouro" ng-model="vm.pessoa.logradouro">
 							    	<option value="">Selecione</option> 	
 								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<label for="filtro">Filtrar Logradouro:</label>
+								<input id="filtro" type="text" name="filtro" class="form-control" placeholder="Filtrar logradouros" ng-model="vm.filtrar">
+								<span class="input-group-btn">
+									<button type="button" ng-click="vm.filtrarLogradouro()" style="margin-top: 25px;" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="numero">Adicionar Novo Logradouro:</label>
+								<br/>
+								<button type="button" class="btn btn-primary btn-flat" ng-click="vm.abrirModal()">Adicionar</button>
 							</div>
 						</div>
 					</div>
@@ -119,4 +142,27 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade modalLogradouro" id="modalLogradouro" tabindex="-1" role="dialog" aria-labelledby="modalLogradouroLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form novalidate name="formularioLogradouro" ng-submit="vm.salvarLogradouro(formularioLogradouro)">
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group" ng-class="formularioLogradouro.nome.$dirty && formularioLogradouro.nome.$invalid ? 'has-error' : ''">
+							<label for="nome">Nome: *</label>
+							<input id="nome" type="text" name="nome" class="form-control" placeholder="Informe o logradouro" ng-model="vm.logradouro.nome" required>
+							<span class="help-block" ng-show="formularioLogradouro.nome.$dirty && formularioLogradouro.nome.$invalid">O campo é obrigatório</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary btn-flat" ng-disabled="formularioLogradouro.$invalid">Salvar</button>
+				<button type="button" class="btn btn-primary btn-flat" data-dismiss="modal">Fechar</button>
+			</div>
+			</form>
+		</div>
+	</div>
 </div>

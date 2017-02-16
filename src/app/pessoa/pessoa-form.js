@@ -9,9 +9,10 @@
 		'controllerUtils',
 		'pessoaRest',
 		'pessoaDto',
-		'$scope'];
+		'$scope',
+		'logradouroRest'];
 
-	function PessoaForm(controllerUtils, dataservice, dto, $scope) {
+	function PessoaForm(controllerUtils, dataservice, dto, $scope, logradouroRest) {
 		/* jshint validthis: true */
 		var vm = this;
 
@@ -22,11 +23,16 @@
 		vm.editar = false;
 		vm.editar = false;
 		vm.cidadeList = [];
+		vm.filtrar = null;
+		vm.filtrarLogradouro = filtrarLogradouro;
 		vm.tipoPessoaList = [];
 		vm.salvar = salvar;
 		vm.voltar = voltar;
 		vm.bairroList = [];
 		vm.logradouroList = [];
+		vm.abrirModal = abrirModal;
+		vm.salvarLogradouro = salvarLogradouro;
+		vm.logradouro = {};
 
 		vm.teste = teste;
 
@@ -34,6 +40,49 @@
 
 		function teste() {
 			console.log(vm.pessoa);
+		}
+
+		function salvarLogradouro(formulario) {
+			var objeto = {
+				nome: vm.logradouro.nome,
+				bairro: vm.pessoa.bairro
+			};
+
+			if (formulario.$valid) {
+				logradouroRest.salvar(objeto).then(success).catch(error);
+			} else {
+				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Dados inválidos.');
+			}
+
+			function error(response) {
+				vm.logradouro = {};
+				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao registrar o logradouro.');
+			}
+
+			function success(response) {
+				vm.logradouro = {};
+				controllerUtils.feedMessage(response);
+				$('#modalLogradouro').modal('hide');
+
+				if (response.data.status == 'true') {
+					carregarLogradouroList(vm.pessoa.bairro);
+				}
+			}
+
+		}
+
+		function abrirModal() {
+			vm.logradouro = {};
+
+			if (vm.pessoa.cidade) {
+				if (vm.pessoa.bairro) {
+					$('#modalLogradouro').modal('show');
+				} else {
+					controllerUtils.feed(controllerUtils.messageType.WARNING, 'Para registrar um logradouro, é necessário selecionar o bairro.');	
+				}
+			} else {
+				controllerUtils.feed(controllerUtils.messageType.WARNING, 'Para registrar um logradouro, é necessário selecionar a cidade.');	
+			}
 		}
 
 		function atualizar(formulario) {
@@ -165,6 +214,33 @@
 		function editarObjeto() {
 			vm.editar = !angular.equals({}, controllerUtils.$routeParams);
 			return !angular.equals({}, controllerUtils.$routeParams);
+		}
+
+		function filtrarLogradouro() {
+			if (vm.filtrar) {
+				if (vm.pessoa.bairro) {
+					logradouroRest.filtrar({filtro: vm.filtrar, bairro: vm.pessoa.bairro}).then(success).catch(error);	
+				} else {
+					controllerUtils.feed(controllerUtils.messageType.WARNING, 'Selecione um bairro para filtrar os logradouros.');	
+				}
+			} else {
+				controllerUtils.feed(controllerUtils.messageType.WARNING, 'Para filtrar é necessário inserir dados.');	
+			}
+
+			function error(response) {
+				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao filtrar os logradouros.');	
+			}
+
+			function success(response) {
+				var array = controllerUtils.getData(response, 'ArrayList');
+				
+				if (array.length > 0) {
+					vm.logradouroList = array;
+					controllerUtils.feed(controllerUtils.messageType.INFO, 'O filtro foi aplicado. ' + array.length + ' encontrado(s).');	
+				} else {
+					controllerUtils.feed(controllerUtils.messageType.WARNING, 'Nenhum registro encontrado para o filtro informado.');	
+				}
+			}
 		}
 
 		function inicializarObjetos(values) {			

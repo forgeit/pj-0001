@@ -6,6 +6,7 @@
 		'app.core', 
 		'app.home', 
 		'app.layout',
+		'app.logradouro',
 		'app.pessoa',
 		'app.demanda',
 		'app.login',
