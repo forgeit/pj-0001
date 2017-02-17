@@ -26,7 +26,7 @@ class PessoaModel extends MY_Model {
 	}
 
 	function buscarCombo() {
-		$sql = "SELECT id_pessoa, concat(nome, ' <', email, '>') AS nome FROM pessoa ORDER BY 2";
+		$sql = "SELECT id_pessoa, nome AS nome FROM pessoa ORDER BY 2";
 
         $query = $this->db->query($sql);
 
