@@ -71,6 +71,7 @@ $route['pessoa/salvar'] = 'pessoa/salvar';
 $route['upload'] = 'upload/processar';
 $route['login/entrar'] = 'login/entrar';
 $route['demanda/salvar'] = 'demanda/salvar';
+$route['demanda/(:num)/(:num)/(:num)'] = 'demanda/buscarPorData/$1/$2/$3';
 $route['demanda-fluxo/salvar/(:num)'] = 'demandaFluxo/salvar/$1';
 $route['demanda-fluxo/buscar-arquivos/(:num)'] = 'demandaFluxo/buscarArquivos/$1';
 $route['demanda/remover/(:num)'] = 'demanda/remover/$1';

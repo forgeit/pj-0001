@@ -26,6 +26,22 @@
 					]
 				}
 			})
+			.when('/demanda/:dia/:mes/:ano', {
+				templateUrl: 'src/app/demanda/demanda-lista.html',
+				controller: 'DemandaLista',
+				controllerAs: 'vm',
+				titulo: 'Demandas',
+				cabecalho: {
+					h1: 'Demandas',
+					breadcrumbs: [
+						{
+							nome: 'Demandas',
+							link: 'demanda',
+							ativo: true
+						}
+					]
+				}
+			})
 			.when('/nova-demanda', {
 				templateUrl: 'src/app/demanda/demanda-form.html',
 				controller: 'DemandaForm',

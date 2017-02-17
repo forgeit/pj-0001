@@ -14,6 +14,7 @@
 	function DemandaLista($scope, dataservice, tabelaUtils, controllerUtils) {
 		/* jshint validthis: true */
 		var vm = this;
+		vm.data = null;
 		vm.tabela = {};
 		vm.instancia = {};
 
@@ -47,7 +48,14 @@
 				criarColunasTabela();
 
 				function ajax(data, callback, settings) {
-					dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data)).then(success).catch(error);
+
+					if (controllerUtils.$routeParams.dia && controllerUtils.$routeParams.mes && controllerUtils.$routeParams.ano) {
+						vm.data = controllerUtils.$routeParams.dia + '/' + controllerUtils.$routeParams.mes + '/' + controllerUtils.$routeParams.ano;
+						dataservice.buscarPorData(tabelaUtils.criarParametrosGet(data), controllerUtils.$routeParams.dia, controllerUtils.$routeParams.mes, controllerUtils.$routeParams.ano).then(success).catch(error);
+					} else {
+						vm.data = null;
+						dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data)).then(success).catch(error);
+					}
 
 					function error(response) {
 						controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao carregar a lista.');

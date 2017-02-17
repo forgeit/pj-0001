@@ -33,6 +33,46 @@ class DemandaModel extends MY_Model {
         }
 	}	
 
+	function buscarPorDataNativo($data) {
+		$sql = "SELECT
+				d.id_demanda,
+				d.titulo,
+				DATE_FORMAT(dt_criacao,'%d/%m/%Y') AS dt_criacao,
+				CASE WHEN prazo_final IS NULL THEN '-' ELSE DATE_FORMAT(prazo_final,'%d/%m/%Y') END AS prazo_final,
+				s.descricao AS situacao,
+				p.nome AS solicitante
+				FROM demanda d
+				JOIN tipo_demanda td ON td.id_tipo_demanda = d.id_tipo_demanda
+				JOIN situacao s ON s.id_situacao = d.id_situacao
+				JOIN pessoa p ON p.id_pessoa = d.id_solicitante
+				WHERE prazo_final = ?";
+
+        $query = $this->db->query($sql, array($data));
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}	
+
+	function buscarCartoes($data) {
+		$sql = "select 
+				count(case when id_situacao = 5 then 1 else null end) as nao_resolvida,
+				count(case when id_situacao = 6 then 1 else null end) as resolvida,
+				count(case when id_situacao <> 5 and id_situacao <> 6 then 1 else null end) as outras
+				from demanda
+				where prazo_final = ?";
+
+        $query = $this->db->query($sql, array($data));
+
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return null;
+        }
+	}	
+
 	function buscarPorPessoa($id) {
 		$sql = "SELECT
 				id_demanda

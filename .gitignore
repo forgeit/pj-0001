@@ -6,3 +6,5 @@ debug/
 vendor/
 build/
 server/system/cache/
+gulp.config.php.json
+index-deploy.html

@@ -8,6 +8,12 @@ class Demanda extends MY_Controller {
 		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
 	}
 
+	public function buscarPorData() {
+		$data = $this->uri->segment(4) . '-' . $this->uri->segment(3) . '-' . $this->uri->segment(2);
+		$lista = $this->DemandaModel->buscarPorDataNativo($data);
+		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
+	}
+
 	public function buscar() {
 
 		$dados = $this->DemandaModel->buscarPorIdCompleto($this->uri->segment(3));

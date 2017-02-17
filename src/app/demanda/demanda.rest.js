@@ -11,6 +11,7 @@
 		var service = {
 			buscar: buscar,
 			buscarTodos: buscarTodos,
+			buscarPorData: buscarPorData,
 			buscarArquivosPorDemandaFluxo: buscarArquivosPorDemandaFluxo,
 			salvar: salvar,
 			remover: remover,
@@ -25,6 +26,10 @@
 
 		function buscar(data) {
 			return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'buscar/' + data);
+		}
+
+		function buscarPorData(data, dia, mes, ano) {
+			return $http.get(configuracaoREST.url + configuracaoREST.demanda + dia + '/' + mes + '/' + ano);
 		}
 
 		function buscarTodos(data) {
