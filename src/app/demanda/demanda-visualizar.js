@@ -12,12 +12,26 @@
 		'configuracaoREST',
 		'demandaRest',
 		'pessoaRest',
-		'situacaoRest'];
+		'situacaoRest',
+		'tipoDemandaRest',
+		'datepicker',
+		'datepickerSemLimite'];
 
-	function DemandaVisualizar(controllerUtils, $scope, FileUploader, configuracaoREST, demandaRest, pessoaRest, situacaoRest) {
+	function DemandaVisualizar(
+		controllerUtils, 
+		$scope, 
+		FileUploader, 
+		configuracaoREST, 
+		demandaRest, 
+		pessoaRest, 
+		situacaoRest, 
+		tipoDemandaRest,
+		datepicker,
+		datepickerSemLimite) {
+
 		/* jshint validthis: true */
 		var vm = this;
-
+		vm.atualizar = atualizar;
 		vm.demanda = {};
 		vm.descricao = null;
 		vm.destinatarioList = [];
@@ -30,13 +44,30 @@
 		vm.salvar = salvar;
 		vm.setarDescricao = setarDescricao;
 		vm.setarArquivos = setarArquivos;
+		vm.tipoDemandaList = [];
 		vm.voltar = voltar;
 
 		vm.teste = function () {
-			console.log(vm.demandaFluxo);
+			console.log(vm.demanda);
 		}
 
 		iniciar();
+
+		function atualizar(formulario) {
+			demandaRest.atualizar(controllerUtils.$routeParams.id, vm.demanda).then(success).catch(error);
+
+			function error(response) {
+				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao atualizar a pessoa.');
+			}
+
+			function success(response) {
+				controllerUtils.feedMessage(response);
+
+				if (response.data.status == 'true') {
+					voltar();
+				}
+			}
+		}
 
 		function carregar() {
 			return demandaRest.buscar(controllerUtils.$routeParams.id).then(success).catch(error);
@@ -77,6 +108,19 @@
 			}
 		}
 
+		function carregarTipoDemanda() {
+			return tipoDemandaRest.buscarTodos().then(success).catch(error);
+
+			function error(response) {
+				return controllerUtils.promise.criar(false, []);
+			}
+
+			function success(response) {
+				var array = controllerUtils.getData(response, 'datatables');
+				return controllerUtils.promise.criar(true, array);
+			}
+		}
+
 		function carregarArquivosDemanda(id) {
 			return demandaRest.buscarArquivosPorDemandaFluxo(id).then(success).catch(error);
 
@@ -87,6 +131,7 @@
 			function success(response) {
 				var array = controllerUtils.getData(response, 'ArrayList');
 				vm.arquivos = array;
+				console.log(vm.arquivos);
 				return controllerUtils.promise.criar(true, array);
 			}
 		}
@@ -144,6 +189,12 @@
 			} else {
 				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao carregar as situações');	
 			}
+
+			if (values[3].exec) {
+				vm.tipoDemandaList = values[3].objeto;
+			} else {
+				controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao carregar os tipos de demanda');	
+			}
 		}
 
 		function iniciar() {
@@ -152,6 +203,9 @@
 			promises.push(carregar());
 			promises.push(carregarDestinatarios());
 			promises.push(carregarSituacao());
+			promises.push(carregarTipoDemanda());
+			$('#dtContato').datepicker(datepicker);
+			$('#prazoFinal').datepicker(datepickerSemLimite);
 
 			return controllerUtils.ready(promises).then(function (values) {
 				inicializarObjetos(values);

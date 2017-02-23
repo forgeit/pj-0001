@@ -5,9 +5,10 @@ class Upload extends MY_Controller {
 
 	public function processar() {
 		$json = array();
-		$config['upload_path']   = '../arquivos/tmp';
+		$config['upload_path']   = 'application/views/upload/arquivos/tmp/';
 		$config['allowed_types'] = 'jpg|png|pdf';//Só vai aceitar jpg ou png
 		$config['encrypt_name']  = TRUE;
+		$config['max_size'] = '204800';
 
 	    $this->load->library('upload', $config);
 	    $this->upload->initialize($config);

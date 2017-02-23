@@ -21,7 +21,8 @@ class VerArquivo extends MY_Controller {
 	public function porDemandaFluxo() {
 		$idDemandaFluxo = $this->uri->segment(3);
 		$idArquivo = $this->uri->segment(5);
-		$retorno = $this->DemandaArquivoFluxoModel->buscarArquivosPorIdDemandaEId($idDemanda, $idArquivo);
+
+		$retorno = $this->DemandaArquivoFluxoModel->buscarArquivosPorIdDemandaFluxoEId($idDemandaFluxo, $idArquivo);
 		if ($retorno) {
 			$arquivo = file_get_contents($retorno['arquivo']);
 			$fileInfo = new finfo(FILEINFO_MIME_TYPE);

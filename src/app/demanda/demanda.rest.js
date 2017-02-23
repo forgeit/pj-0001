@@ -9,6 +9,7 @@
 
 	function dataservice($http, $location, $q, configuracaoREST, $httpParamSerializer) {
 		var service = {
+			atualizar: atualizar,
 			buscar: buscar,
 			buscarTodos: buscarTodos,
 			buscarPorData: buscarPorData,
@@ -19,6 +20,10 @@
 		};
 
 		return service;
+
+		function atualizar(id, data) {
+			return $http.post(configuracaoREST.url + configuracaoREST.demanda + 'atualizar/' + id, data);
+		}
 
 		function buscarArquivosPorDemandaFluxo(data) {
 			return $http.get(configuracaoREST.url + 'demanda-fluxo/buscar-arquivos/' + data);

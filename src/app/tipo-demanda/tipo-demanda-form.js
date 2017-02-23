@@ -42,7 +42,6 @@
 			return dataservice.buscar(data).then(success).catch(error);
 
 			function error(response) {
-				console.log(response);
 				return controllerUtils.promise.criar(false, {});
 			}
 

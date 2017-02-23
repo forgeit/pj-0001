@@ -3,6 +3,68 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Demanda extends MY_Controller {
 
+	public function atualizar() {
+		$data = $this->security->xss_clean($this->input->raw_input_stream);
+		$demanda = json_decode($data);
+		$demandaModel = array();
+
+		if ($demanda->titulo) {
+			$demandaModel['titulo'] = strtoupper($demanda->titulo);
+		} else {
+			print_r(json_encode($this->gerarRetorno(FALSE, "O campo título é obrigatório.")));
+			die();
+		}
+
+		if ($demanda->solicitante) {
+			$demandaModel['id_solicitante'] = strtoupper($demanda->solicitante);
+		} else {
+			print_r(json_encode($this->gerarRetorno(FALSE, "O campo solicitante é obrigatório.")));
+			die();
+		}
+
+		if (isset($demanda->descricao)) {
+			if ($demanda->descricao) {
+				$demandaModel['descricao'] = strtoupper($demanda->descricao);
+			}
+		}
+
+		if ($demanda->tipoDemanda) {
+			$demandaModel['id_tipo_demanda'] = strtoupper($demanda->tipoDemanda);
+		} else {
+			print_r(json_encode($this->gerarRetorno(FALSE, "O campo tipo de demanda é obrigatório.")));
+			die();
+		}		
+
+		if ($demanda->dtContato) {
+			$data = explode("/", $demanda->dtContato);
+			$demandaModel['dt_contato'] = $data[2] . '-' . $data[1] . '-' . $data[0];
+		} else {
+			print_r(json_encode($this->gerarRetorno(FALSE, "O campo data de contato é obrigatório.")));
+			die();
+		}		
+
+		if (isset($demanda->prazoFinal)) {
+			if ($demanda->prazoFinal) {
+
+				$data = explode("/", $demanda->prazoFinal);
+				$demandaModel['prazo_final'] = $data[2] . '-' . $data[1] . '-' . $data[0];
+
+			}
+		}
+
+		$this->db->trans_begin();
+
+		$this->DemandaModel->atualizar($this->uri->segment(3), $demandaModel, 'id_demanda');
+
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			print_r(json_encode($this->gerarRetorno(FALSE, "Ocorreu um erro ao atualizar a nova demanda.")));
+		} else {
+			$this->db->trans_commit();
+			print_r(json_encode($this->gerarRetorno(TRUE, "A demanda foi atualizada com sucesso.")));
+		}
+	}
+
 	public function buscarTodos() {
 		$lista = $this->DemandaModel->buscarTodosNativo();
 		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
@@ -27,10 +89,8 @@ class Demanda extends MY_Controller {
 			$fluxo[$key]['total'] = $value['total'] == 0 ? 'Não Possui' : $value['total'];
 		}
 
-		$dados['dtContato'] = $dados['dtContato'] == '00/00/0000' ? 'Não Informado' : $dados['dtContato'];
-		$dados['prazoFinal'] = $dados['prazoFinal'] == '00/00/0000' ? 'Não Informado' : $dados['prazoFinal'];
-		$dados['prazoFinal'] = $dados['prazoFinal'] == '' ? 'Não Informado' : $dados['prazoFinal'];
-		$dados['descricao'] = $dados['descricao'] == '' ? 'Não Informado' : $dados['descricao'];
+		$dados['prazoFinalDescricao'] = $dados['prazoFinal'] == '' ? 'Não Informado' : $dados['prazoFinal'];
+		$dados['descricaoDescricao'] = $dados['descricao'] == '' ? 'Não Informado' : $dados['descricao'];
 		$dados['arquivos'] = $arquivos;
 		$dados['fluxo'] = $fluxo;
 
@@ -95,8 +155,8 @@ class Demanda extends MY_Controller {
 		if (isset($demanda->arquivos)) {
 			if (count($demanda->arquivos) > 0) {
 				$arquivosTemporarios = $demanda->arquivos;
-				$temporario = "../arquivos/tmp/";
-				$diretorio = "../arquivos/demanda/";
+				$temporario = "application/views/upload/arquivos/tmp/";
+				$diretorio = "application/views/upload/arquivos/demanda/";
 
 				foreach ($arquivosTemporarios as $key => $value) {
 					if (!file_exists($temporario . $value)) {

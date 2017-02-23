@@ -45,8 +45,8 @@ class DemandaFluxo extends MY_Controller {
 		if (isset($demandaFluxo->arquivos)) {
 			if (count($demandaFluxo->arquivos) > 0) {
 				$arquivosTemporarios = $demandaFluxo->arquivos;
-				$temporario = "../arquivos/tmp/";
-				$diretorio = "../arquivos/demanda_fluxo/";
+				$temporario = "application/views/upload/arquivos/tmp/";
+				$diretorio = "application/views/upload/arquivos/demanda_fluxo/";
 
 				foreach ($arquivosTemporarios as $key => $value) {
 					if (!file_exists($temporario . $value)) {

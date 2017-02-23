@@ -28,4 +28,23 @@ class DemandaArquivoModel extends MY_Model {
             return null;
         }
 	}	
+
+	function buscarArquivosPorIdDemandaEId($idDemanda, $idArquivo) {
+		$sql = "SELECT 
+				id_demanda_arquivo,
+				nome,
+				arquivo
+				FROM demanda_arquivo
+				WHERE 
+				id_demanda = ? AND
+				id_demanda_arquivo = ?";
+
+        $query = $this->db->query($sql, array($idDemanda, $idArquivo));
+
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return null;
+        }
+	}	
 }
