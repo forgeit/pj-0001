@@ -11,7 +11,7 @@
 	function routes($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/demanda', {
-				templateUrl: 'src/app/demanda/demanda-lista.html',
+				templateUrl: 'src/app/demanda/demanda-lista.html?' + new Date().getTime(),
 				controller: 'DemandaLista',
 				controllerAs: 'vm',
 				titulo: 'Demandas',
@@ -27,7 +27,7 @@
 				}
 			})
 			.when('/demanda/:dia/:mes/:ano', {
-				templateUrl: 'src/app/demanda/demanda-lista.html',
+				templateUrl: 'src/app/demanda/demanda-lista.html?' + new Date().getTime(),
 				controller: 'DemandaLista',
 				controllerAs: 'vm',
 				titulo: 'Demandas',
@@ -43,7 +43,7 @@
 				}
 			})
 			.when('/nova-demanda', {
-				templateUrl: 'src/app/demanda/demanda-form.html',
+				templateUrl: 'src/app/demanda/demanda-form.html?' + new Date().getTime(),
 				controller: 'DemandaForm',
 				controllerAs: 'vm',
 				titulo: 'Cadastro de Demanda',
@@ -63,7 +63,7 @@
 				}
 			})
 			.when('/visualizar-demanda/:id', {
-				templateUrl: 'src/app/demanda/demanda-visualizar.html',
+				templateUrl: 'src/app/demanda/demanda-visualizar.html?' + new Date().getTime(),
 				controller: 'DemandaVisualizar',
 				controllerAs: 'vm',
 				titulo: 'Atualização de Demanda',

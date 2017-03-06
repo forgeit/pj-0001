@@ -11,7 +11,7 @@
 	function routes($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/tipo-demanda', {
-				templateUrl: 'src/app/tipo-demanda/tipo-demanda-lista.html',
+				templateUrl: 'src/app/tipo-demanda/tipo-demanda-lista.html?' + new Date().getTime(),
 				controller: 'TipoDemandaLista',
 				controllerAs: 'vm',
 				titulo: 'Tipos de Demanda',
@@ -27,7 +27,7 @@
 				}
 			})
 			.when('/nova-tipo-demanda', {
-				templateUrl: 'src/app/tipo-demanda/tipo-demanda-form.html',
+				templateUrl: 'src/app/tipo-demanda/tipo-demanda-form.html?' + new Date().getTime(),
 				controller: 'TipoDemandaForm',
 				controllerAs: 'vm',
 				titulo: 'Cadastro de Tipo de Demanda',
@@ -47,7 +47,7 @@
 				}
 			})
 			.when('/nova-tipo-demanda/:id', {
-				templateUrl: 'src/app/tipo-demanda/tipo-demanda-form.html',
+				templateUrl: 'src/app/tipo-demanda/tipo-demanda-form.html?' + new Date().getTime(),
 				controller: 'TipoDemandaForm',
 				controllerAs: 'vm',
 				titulo: 'Cadastro de Tipo de Demanda',

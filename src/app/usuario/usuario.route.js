@@ -11,7 +11,7 @@
 	function routes($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/alterar-senha', {
-				templateUrl: 'src/app/usuario/alterar-senha.html',
+				templateUrl: 'src/app/usuario/alterar-senha.html?' + new Date().getTime(),
 				controller: 'AlterarSenha',
 				controllerAs: 'vm',
 				titulo: 'Alterar Senha',

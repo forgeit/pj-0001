@@ -25,6 +25,10 @@
 			if (objeto.cnpj) {
 				dto.cnpj = objeto.cnpj;
 			}
+
+			if (objeto.numero) {
+				dto.numero = objeto.numero;
+			}
 			
 			if (objeto.cpf) {
 				dto.cpf = objeto.cpf;

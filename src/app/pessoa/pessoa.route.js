@@ -11,7 +11,7 @@
 	function routes($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/pessoa', {
-				templateUrl: 'src/app/pessoa/pessoa-lista.html',
+				templateUrl: 'src/app/pessoa/pessoa-lista.html?' + new Date().getTime(),
 				controller: 'PessoaLista',
 				controllerAs: 'vm',
 				titulo: 'Pessoas',
@@ -27,7 +27,7 @@
 				}
 			})
 			.when('/nova-pessoa', {
-				templateUrl: 'src/app/pessoa/pessoa-form.html',
+				templateUrl: 'src/app/pessoa/pessoa-form.html?' + new Date().getTime(),
 				controller: 'PessoaForm',
 				controllerAs: 'vm',
 				titulo: 'Cadastro de Pessoa',
@@ -47,7 +47,7 @@
 				}
 			})
 			.when('/nova-pessoa/:id', {
-				templateUrl: 'src/app/pessoa/pessoa-form.html',
+				templateUrl: 'src/app/pessoa/pessoa-form.html?' + new Date().getTime(),
 				controller: 'PessoaForm',
 				controllerAs: 'vm',
 				titulo: 'Cadastro de Pessoa',
