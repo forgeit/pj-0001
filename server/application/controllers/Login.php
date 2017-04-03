@@ -29,7 +29,7 @@ class Login extends MY_Controller {
 	public function generate_token($usuario){
     	$this->load->library("JWT");
 	    $CONSUMER_SECRET = 'sistema_mathias_2016';
-	    $CONSUMER_TTL = 1800;
+	    $CONSUMER_TTL = 28800;
 	    return $this->jwt->encode(array(
 	   	  'id' => $usuario['id_usuario'],
 	   	  'nome' => $usuario['nome'],
