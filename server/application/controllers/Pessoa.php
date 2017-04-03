@@ -147,7 +147,13 @@ class Pessoa extends MY_Controller {
 	}
 
 	public function buscarTodos() {
-		$lista = $this->PessoaModel->buscarTodosNativo();
+
+		if ($this->uri->segment(2) == 'tipo-pessoa' && $this->uri->segment(3)) {
+			$lista = $this->PessoaModel->buscarTodosNativo($this->uri->segment(3));
+		} else {
+			$lista = $this->PessoaModel->buscarTodosNativo();
+		}
+
 		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
 	}
 

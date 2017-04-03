@@ -6,7 +6,7 @@ class PessoaModel extends MY_Model {
 		$this->table = 'pessoa';
 	}
 
-	function buscarTodosNativo() {
+	function buscarTodosNativo($id = null) {
 		$sql = "SELECT 
 				p.id_pessoa, 
                 p.nome, 
@@ -14,9 +14,17 @@ class PessoaModel extends MY_Model {
                 CASE WHEN p.celular IS NULL THEN '-' ELSE p.celular END AS celular, 
                 t.descricao as tipo
 				FROM pessoa p
-				JOIN tipo_pessoa t ON t.id_tipo_pessoa = p.id_tipo_pessoa";
+				JOIN tipo_pessoa t ON t.id_tipo_pessoa = p.id_tipo_pessoa ";
 
-        $query = $this->db->query($sql);
+        if ($id != null) {
+            $sql .= " WHERE t.id_tipo_pessoa = ?";
+        }
+
+        if ($id == null) {
+            $query = $this->db->query($sql);
+        } else {
+            $query = $this->db->query($sql, array($id));
+        }
 
         if ($query->num_rows() > 0) {
             return $query->result_array();

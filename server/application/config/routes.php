@@ -57,6 +57,7 @@ $route['endereco/bairro/(:num)'] = 'endereco/bairro/$1';
 $route['endereco/logradouro/(:num)'] = 'endereco/logradouro/$1';
 $route['tipo-pessoa'] = 'tipoPessoa/buscarTodos';
 $route['pessoa'] = 'pessoa/buscarTodos';
+$route['pessoa/tipo-pessoa/(:num)'] = 'pessoa/buscarTodos/$1';
 $route['pessoa/combo'] = 'pessoa/buscarCombo';
 $route['pessoa/filtro'] = 'pessoa/buscarComboFiltro';
 $route['pessoa/(:num)'] = 'pessoa/buscar';
