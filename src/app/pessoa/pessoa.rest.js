@@ -56,8 +56,15 @@
 			return $http.get(configuracaoREST.url + 'endereco/cidade');
 		}	
 
-		function buscarTodos(data) {
-			return $http.get(configuracaoREST.url + configuracaoREST.pessoa);
+		function buscarTodos(data, id) {
+
+			if (id != null) {
+				return $http.get(configuracaoREST.url + configuracaoREST.pessoa + 'tipo-pessoa/' + id);
+			} else {
+				return $http.get(configuracaoREST.url + configuracaoREST.pessoa);
+			}
+
+			
 		}
 
 		function remover(data) {

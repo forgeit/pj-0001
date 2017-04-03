@@ -7,6 +7,30 @@
 						<a href="nova-pessoa" class="btn btn-primary btn-flat">Cadastrar</a>
 					</div>
 				</div>
+				<div class="row" style="padding-top: 10px;">
+					<div class="col-md-12">
+						<div class="box box-primary collapsed-box" style="border: none;">
+							<div class="box-header" >
+								<h3 class="box-title" style="font-weight: bold;">Filtrar Pessoas do Sistema</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+							<div class="box-body" style="display: none;">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="tipoPessoa">Tipo de Pessoa:</label>
+											<select class="form-control" id="tipoPessoa" name="tipoPessoa" ng-options="tipoPessoa.id_tipo_pessoa as tipoPessoa.descricao for tipoPessoa in vm.tipoPessoaList" ng-model="vm.filtro" ng-change="vm.alterarPessoasLista()">
+												<option value="">Todos os Tipos</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<lista></lista>

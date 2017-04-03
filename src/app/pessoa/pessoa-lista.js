@@ -14,13 +14,33 @@
 	function PessoaLista($scope, dataservice, tabelaUtils, controllerUtils) {
 		/* jshint validthis: true */
 		var vm = this;
+		vm.alterarPessoasLista = alterarPessoasLista;
+		vm.filtro = null;
 		vm.tabela = {};
+		vm.tipoPessoaList = [];
 		vm.instancia = {};
 
 		iniciar();
 
+		function alterarPessoasLista() {
+			tabelaUtils.recarregarDados(vm.instancia);
+		}
+
+		function carregarTipoPessoaList() {
+			return dataservice.buscarComboTipoPessoa().then(success).catch(error);
+
+			function error(response) {
+				return [];
+			}
+
+			function success(response) {
+				vm.tipoPessoaList = controllerUtils.getData(response, 'ArrayList');
+			}
+		}
+
 		function iniciar() {
 			montarTabela();
+			carregarTipoPessoaList();
 		}
 
 		function montarTabela() {
@@ -46,7 +66,7 @@
 				criarColunasTabela();
 
 				function ajax(data, callback, settings) {
-					dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data)).then(success).catch(error);
+					dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data), vm.filtro).then(success).catch(error);
 
 					function error(response) {
 						controllerUtils.feed(controllerUtils.messageType.ERROR, 'Ocorreu um erro ao carregar a lista.');
