@@ -10,6 +10,38 @@
 						<a href="nova-demanda" class="btn btn-primary btn-flat">Cadastrar</a>
 					</div>
 				</div>
+				<div class="row" style="padding-top: 10px;" ng-hide="vm.data">
+					<div class="col-md-12">
+						<div class="box box-primary collapsed-box" style="border: none;">
+							<div class="box-header" >
+								<h3 class="box-title" style="font-weight: bold;">Filtrar Demandas do Sistema</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+							<div class="box-body" style="display: none;">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="tipoDemanda">Tipo de Demanda:</label>
+											<select class="form-control" id="tipoDemanda" name="tipoDemanda" ng-options="tipoDemanda.id_tipo_demanda as tipoDemanda.descricao for tipoDemanda in vm.tipoDemandaList" ng-model="vm.filtroTipo" ng-change="vm.alterarDemandaLista()">
+												<option value="">Todos os Tipos</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="situacao">Situação da Demanda:</label>
+											<select class="form-control" id="situacao" name="situacao" ng-options="situacao.id_situacao as situacao.descricao for situacao in vm.situacaoList" ng-model="vm.filtroSituacao" ng-change="vm.alterarDemandaLista()">
+												<option value="">Todos as Situações</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<lista></lista>

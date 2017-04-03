@@ -8,20 +8,53 @@
 	DemandaLista.$inject = [
 		'$scope', 
 		'demandaRest', 
+		'tipoDemandaRest',
+		'situacaoRest',
 		'tabelaUtils', 
 		'controllerUtils'];
 
-	function DemandaLista($scope, dataservice, tabelaUtils, controllerUtils) {
+	function DemandaLista($scope, dataservice, tipoDemandaRest, situacaoRest, tabelaUtils, controllerUtils) {
 		/* jshint validthis: true */
 		var vm = this;
+		vm.alterarDemandaLista = alterarDemandaLista;
 		vm.data = null;
 		vm.tabela = {};
 		vm.instancia = {};
 
 		iniciar();
 
+		function alterarDemandaLista() {
+			tabelaUtils.recarregarDados(vm.instancia);
+		}
+
+		function carregarTipoDemanda() {
+			return tipoDemandaRest.buscarTodos().then(success).catch(error);
+
+			function error(response) {
+				vm.tipoDemandaList = [];
+			}
+
+			function success(response) {
+				vm.tipoDemandaList = controllerUtils.getData(response, 'datatables');
+			}
+		}
+
+		function carregarSituacao() {
+			return situacaoRest.buscarTodos().then(success).catch(error);
+
+			function error(response) {
+				vm.situacaoList = [];
+			}
+
+			function success(response) {
+				vm.situacaoList = controllerUtils.getData(response, 'ArrayList');
+			}
+		}
+
 		function iniciar() {
 			montarTabela();
+			carregarTipoDemanda();
+			carregarSituacao();
 		}
 
 		function montarTabela() {
@@ -54,7 +87,7 @@
 						dataservice.buscarPorData(tabelaUtils.criarParametrosGet(data), controllerUtils.$routeParams.dia, controllerUtils.$routeParams.mes, controllerUtils.$routeParams.ano).then(success).catch(error);
 					} else {
 						vm.data = null;
-						dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data)).then(success).catch(error);
+						dataservice.buscarTodos(tabelaUtils.criarParametrosGet(data), vm.filtroTipo, vm.filtroSituacao).then(success).catch(error);
 					}
 
 					function error(response) {

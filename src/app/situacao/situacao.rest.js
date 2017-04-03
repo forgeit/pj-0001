@@ -9,13 +9,18 @@
 
 	function dataservice($http, $location, $q, configuracaoREST, $httpParamSerializer) {
 		var service = {
-			buscarCombo: buscarCombo
+			buscarCombo: buscarCombo,
+			buscarTodos: buscarTodos
 		};
 
 		return service;
 
 		function buscarCombo() {
 			return $http.get(configuracaoREST.url + 'situacao/combo');
+		}	
+
+		function buscarTodos() {
+			return $http.get(configuracaoREST.url + 'situacao');
 		}	
 	}
 })();

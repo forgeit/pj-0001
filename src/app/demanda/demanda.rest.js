@@ -37,8 +37,17 @@
 			return $http.get(configuracaoREST.url + configuracaoREST.demanda + dia + '/' + mes + '/' + ano);
 		}
 
-		function buscarTodos(data) {
-			return $http.get(configuracaoREST.url + configuracaoREST.demanda);
+		function buscarTodos(data, tipo, situacao) {
+			if (tipo != null && situacao != null) {
+				return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'tipo-demanda/' + tipo + '/situacao/' + situacao);
+			} else if (tipo != null) {
+				return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'tipo-demanda/' + tipo);
+			} else if (situacao != null) {
+				return $http.get(configuracaoREST.url + configuracaoREST.demanda + 'situacao/' + situacao);
+			} else {
+				return $http.get(configuracaoREST.url + configuracaoREST.demanda);
+			}
+			
 		}
 
 		function salvar(data) {
