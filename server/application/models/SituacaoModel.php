@@ -17,4 +17,16 @@ class SituacaoModel extends MY_Model {
             return null;
         }
 	}
+
+	function buscarTodosNativo() {
+		$sql = "SELECT id_situacao, descricao FROM situacao ORDER BY 2";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return null;
+        }
+	}
 }

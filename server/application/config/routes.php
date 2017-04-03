@@ -79,7 +79,12 @@ $route['demanda-fluxo/buscar-arquivos/(:num)'] = 'demandaFluxo/buscarArquivos/$1
 $route['demanda/remover/(:num)'] = 'demanda/remover/$1';
 $route['demanda/buscar/(:num)'] = 'demanda/buscar/$1';
 $route['demanda'] = 'demanda/buscarTodos';
+//filtros
+$route['demanda/tipo-demanda/(:num)'] = 'demanda/buscarTodos/$1';
+$route['demanda/tipo-demanda/(:num)/situacao/(:num)'] = 'demanda/buscarTodos/$1/$2';
+$route['demanda/situacao/(:num)'] = 'demanda/buscarTodos/$1';
 $route['situacao/combo'] = 'situacao/buscarCombo';
+$route['situacao'] = 'situacao/buscarTodos';
 $route['usuario/alterar-senha/(:num)'] = 'usuario/alterarSenha/$1';
 $route['logradouro/filtrar'] = 'logradouro/filtrar';
 $route['logradouro/salvar'] = 'logradouro/salvar';

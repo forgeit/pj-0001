@@ -66,7 +66,16 @@ class Demanda extends MY_Controller {
 	}
 
 	public function buscarTodos() {
-		$lista = $this->DemandaModel->buscarTodosNativo();
+		if ($this->uri->segment(2) == 'tipo-demanda' && $this->uri->segment(4) == 'situacao') {
+			$lista = $this->DemandaModel->buscarTodosNativo($this->uri->segment(3), $this->uri->segment(5));
+		} else if ($this->uri->segment(2) == 'tipo-demanda') {
+			$lista = $this->DemandaModel->buscarTodosNativo($this->uri->segment(3));
+		} else if ($this->uri->segment(2) == 'situacao') {
+			$lista = $this->DemandaModel->buscarTodosNativo(null, $this->uri->segment(3));
+		} else {
+			$lista = $this->DemandaModel->buscarTodosNativo();
+		}
+		
 		print_r(json_encode(array('data' => array ('datatables' => $lista ? $lista : array()))));
 	}
 

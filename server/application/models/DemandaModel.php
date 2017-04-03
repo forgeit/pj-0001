@@ -11,7 +11,7 @@ class DemandaModel extends MY_Model {
         return $query = $this->db->query($sql, array($id));
     }
 
-	function buscarTodosNativo() {
+	function buscarTodosNativo($tipo = null, $situacao = null) {
 		$sql = "SELECT
 				d.id_demanda,
 				d.titulo,
@@ -24,7 +24,23 @@ class DemandaModel extends MY_Model {
 				JOIN situacao s ON s.id_situacao = d.id_situacao
 				JOIN pessoa p ON p.id_pessoa = d.id_solicitante";
 
-        $query = $this->db->query($sql);
+		if ($tipo != null && $situacao != null) {
+			$sql .= " WHERE td.id_tipo_demanda = ? AND s.id_situacao = ? ";
+		} else if ($tipo != null) {
+			$sql .= " WHERE td.id_tipo_demanda = ? ";
+		} else if ($situacao != null) {
+			$sql .= " WHERE s.id_situacao = ? ";
+		}
+
+		if ($tipo != null && $situacao != null) {
+			$query = $this->db->query($sql, array($tipo, $situacao));
+		} else if ($tipo != null) {
+			$query = $this->db->query($sql, array($tipo));
+		} else if ($situacao != null) {
+			$query = $this->db->query($sql, array($situacao));
+		} else {
+			$query = $this->db->query($sql);
+		}
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
