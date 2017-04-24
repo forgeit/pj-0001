@@ -1,6 +1,5 @@
 arquivos/
 server/application/config/database.php
-database/
 debug/
 build/
 server/system/cache/
